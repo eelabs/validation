@@ -8,13 +8,6 @@ on:
     branches-ignore:
       - master
 
-env:
-  # access to private repos
-  ACCESSTOKEN: ${{ secrets.MACHINE_ACCESS_TOKEN }}
-  GOPRIVATE: "github.com/eelabs"
-  GONOSUMDB: "eelabs/*"
-  USERNAME: eelabs-machine
-
 jobs:
   review:
     name: Review code
@@ -37,12 +30,7 @@ jobs:
             ${{ runner.os }}-go-
 
       - name: Check suspicious constructs (vet)
-        run: |
-          go vet ./...
-
-      # necessary for private repos as staticcheck needs executes mod vendor
-      # - name: Configure git for private modules
-      #  run: git config --global url."https://${USERNAME}:${ACCESSTOKEN}@github.com".insteadOf "https://github.com"
+        run: go vet ./...
 
       # https://staticcheck.io/docs/checks
       - name: Check suspicious constructs (staticcheck)
@@ -107,15 +95,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Start localstack
-        run: docker-compose up -d
-
-      - name: Create dynamodb tables
-        env:
-          AWS_ACCESS_KEY_ID: noop
-          AWS_SECRET_ACCESS_KEY: noop
-          AWS_DEFAULT_REGION: eu-west-2
-        run: $GITHUB_WORKSPACE/localstack-dynamodb-tables.sh
-
       - name: test
-        run: $GITHUB_WORKSPACE/test-local.sh
+        run: go test ./... -cover -coverprofile=cover.out
