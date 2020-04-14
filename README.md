@@ -1,6 +1,6 @@
-# validator
+# validation
 
-![Actions Status](https://github.com/eelabs/validator/workflows/build/badge.svg)
+![Actions Status](https://github.com/eelabs/validation/workflows/build/badge.svg)
 
 Simple helper funcs on top of [github.com/go-playground/validator](https://github.com/go-playground/validator)
 
