@@ -1,12 +1,10 @@
 module github.com/eelabs/validation
 
-go 1.14
+go 1.15
 
 require (
-	github.com/containerd/containerd v1.3.4
-	github.com/go-playground/validator/v10 v10.2.0
-	github.com/google/go-cmp v0.4.0 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
-	github.com/sirupsen/logrus v1.5.0
-	gotest.tools v2.2.0+incompatible // indirect
+	github.com/containerd/containerd v1.4.0
+	github.com/go-playground/validator/v10 v10.3.0
+	github.com/sirupsen/logrus v1.6.0
+	gotest.tools/v3 v3.0.2 // indirect
 )
